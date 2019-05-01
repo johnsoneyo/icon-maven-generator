@@ -1,0 +1,1 @@
+# icon-maven-generator
