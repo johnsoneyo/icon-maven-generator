@@ -1,0 +1,41 @@
+server.port = 7080
+management.server.port: 9001
+management.server.address: 127.0.0.1
+
+#spring.resources.add-mappings=false
+
+spring.datasource.url=jdbc:oracle:thin:@192.168.5.35:1521:xe
+#spring.datasource.url=jdbc:oracle:thin:@localhost:1521:LBTDEVDB
+#spring.datasource.username=bankcore2
+spring.datasource.username=bankcore
+spring.datasource.password=icon1234
+spring.datasource.driver.class=oracle.jdbc.driver.OracleDriver
+
+
+#spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.Oracle10gDialect
+#spring.jpa.hibernate.naming_strategy=org.hibernate.cfg.EJB3NamingStrategy
+#spring.jpa.hibernate.naming.implicit-strategy=org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+#spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+spring.jpa.show-sql = true
+spring.jpa.properties.hibernate.format_sql=true
+spring.jpa.properties.hibernate.use_sql_comments=true
+spring.jpa.properties.hibernate.type=trace 
+spring.jpa.generate-ddl=true
+spring.jpa.hibernate.ddl-auto = update
+#spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL5Dialect
+# Hibernate ddl auto (none, create, create-drop, validate, update)
+
+logging.level.org.hibernate.SQL=DEBUG
+logging.level.org.hibernate.type.descriptor.sql.BasicBinder=TRACE
+logging.level.org.hibernate.type.descriptor.sql=trace
+
+#60 sec
+spring.datasource.hikari.connection-timeout=60000
+# max 5
+spring.datasource.hikari.maximum-pool-size=5
+
+#spring.main.allow-bean-definition-overriding=true
+
+#spring.jackson.serialization.write-dates-as-timestamps=false
+#spring.jackson.serialization-inclusion=NON_EMPTY

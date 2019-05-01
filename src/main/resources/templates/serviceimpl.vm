@@ -1,0 +1,21 @@
+package com.lbt.icon.${package}.domain.${domain};
+
+import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Service;
+
+
+/**
+ * @author johnson3yo
+ * @since 14/03/2019
+ */
+@RequiredArgsConstructor
+@Service
+public class ${domainArtifact}ServiceImpl implements ${domainArtifact}Service {
+
+    private final ${domainArtifact}Repository ${domain}Repository;
+    private final ${domainArtifact}Validator ${domain}Validator;
+    private final ModelMapper modelMapper;
+
+
+}

@@ -1,0 +1,49 @@
+server:
+  port: 9080
+#  ssl:  #read https://drissamri.be/blog/java/enable-https-in-spring-boot/
+#    key-store: classpath:security/ssl/keystore.p12 # keytool -genkey -alias tomcat -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3650
+#    key-store-password: qwertyuiop1234567890
+#    keyStoreType: PKCS12
+#    keyAlias: tomcat
+  compression:
+    enabled: true
+    min-response-size: 200
+    mime-types: "text/html, text/css, text/xml, text/javascript, application/json, application/javascript, application/xml"
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    url: jdbc:oracle:thin:@192.168.5.35:1521:XE
+    username: # username
+    password: # password
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: # configure ddl generation
+    properties:
+      hibernate:
+        default_schema: # schema name 
+        dialect: org.hibernate.dialect.Oracle10gDialect
+  jackson:
+    serialization:
+      indent_output: true
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 1MB
+      max-request-size: 10MB
+      file-size-threshold: 0B
+
+auth:
+  server:
+    link: "http://localhost:8080" #Don't use raw IP
+  client:
+    id: "core-banking"
+    secret: "secret"
+  scopes: "webclient mobileclient"
+  grant-type: "password"
+  jwt:
+    signing-key: "13571113abcdefgHHgfedcba13117531"
+  password-special-chars: "!@?#$%*"

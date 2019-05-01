@@ -1,0 +1,32 @@
+
+package com.lbt.icon.${package}.domain.${domain};
+
+import com.lbt.icon.core.exception.FieldValidationError;
+import com.lbt.icon.core.exception.FieldValidationRuntimeException;
+import com.lbt.icon.core.util.CommonUtils;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
+
+import javax.validation.Validator;
+import java.util.List;
+
+@RequiredArgsConstructor
+@Component
+public class ${domainArtifact}Validator {
+
+    private final Validator validator;
+
+    public void validateFields(Object obj) {
+        List<FieldValidationError> fieldValidationErrors =
+                CommonUtils.getStaticFieldValidationErrors(
+                        obj,
+                        validator
+                );
+
+        if (fieldValidationErrors.isEmpty()) {
+            return;
+        }
+
+        throw new FieldValidationRuntimeException(fieldValidationErrors);
+    }
+}

@@ -1,0 +1,36 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.lbt.icon.${package}.exception;
+
+import com.lbt.icon.core.domain.ApiResponseBase;
+import com.lbt.icon.core.exception.FieldValidationRuntimeException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
+/**
+ * @author Kingsley Ezenwere
+ * @since 10/02/2019
+ */
+@ControllerAdvice()
+public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
+    private final ApiResponseBase<?> apiResponseBase = new ApiResponseBase<>();
+
+
+    @ExceptionHandler(value = {
+            FieldValidationRuntimeException.class,
+    })
+    protected ResponseEntity<ApiResponseBase<?> > fieldValidationException(FieldValidationRuntimeException ex) {
+        apiResponseBase.setHasError(true);
+        apiResponseBase.setErrorMessage(ex.getMessage());
+        apiResponseBase.setErrorCode(HttpStatus.UNAUTHORIZED.value() + "");
+        apiResponseBase.setFieldValidationErrors(ex.getFieldValidationErrors());
+        return new ResponseEntity<>(apiResponseBase, HttpStatus.UNAUTHORIZED);
+    }
+}
+

@@ -1,0 +1,16 @@
+package com.lbt.icon.${package}.domain.${domain};
+
+import io.swagger.annotations.Api;
+import org.springframework.web.bind.annotation.*;
+
+/**
+ * @author johnson3yo
+ * @since 14/03/2019
+ */
+@Api(value = "${domain}s Controller", protocols = "https", description = "For ${domain}s Operations.")
+@RequestMapping("v1/${domain}s")
+@RestController
+public class ${domainArtifact}Controller {
+
+}
+

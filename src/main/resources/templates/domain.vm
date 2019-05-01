@@ -1,0 +1,28 @@
+
+package com.lbt.icon.${package}.domain.${domain};
+
+
+import com.lbt.icon.core.domain.BaseEntity;
+import lombok.*;
+import org.hibernate.annotations.Where;
+import org.hibernate.envers.Audited;
+
+import javax.persistence.*;
+
+
+/**
+ * @author johnson3yo
+ * @since 14/03/2019
+ */
+@Where(clause = "deleted=false")
+@Setter
+@Getter
+@NoArgsConstructor
+@ToString
+@EqualsAndHashCode
+@Audited
+@Entity
+@Table(name = "${domain}")
+public class ${domainArtifact} extends BaseEntity {
+
+}

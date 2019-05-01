@@ -1,0 +1,13 @@
+package com.lbt.icon.${package}.domain.${domain};
+
+import com.lbt.icon.core.domain.repo.GenericRepository;
+import org.springframework.stereotype.Repository;
+
+/**
+ * @author johnson3yo
+ * @since 14/03/2019
+ */
+@Repository
+public interface ${domainArtifact}Repository extends GenericRepository<${domainArtifact}, Long> {
+}
+
