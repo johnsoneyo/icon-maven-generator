@@ -7,7 +7,7 @@ package com.lbt.icon.artifact.plugin;
 
 import com.lbt.icon.artifact.plugin.exception.IconArtifactException;
 import com.lbt.icon.artifact.plugin.factory.pkg.PackageService;
-import com.lbt.icon.artifact.plugin.factory.pkg.TestPath;
+import com.lbt.icon.artifact.plugin.factory.pkg.PathProperty;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -71,7 +71,7 @@ public class PojoTestGeneratorMojoTest {
 
         for (File file : files) {
             try {
-                TestPath retrieved = PackageService.retrievePackageWithClassName(file.getAbsolutePath());
+                PathProperty retrieved = PackageService.retrievePackageWithClassName(file.getAbsolutePath());
                 packages.add(retrieved.getClassPackage());
             } catch (IconArtifactException ex) {
                 Logger.getLogger(PojoTestGeneratorMojoTest.class.getName()).log(Level.SEVERE, null, ex);
@@ -85,7 +85,7 @@ public class PojoTestGeneratorMojoTest {
     @Test
     public void testGetPackageFromLinuxPath() throws IconArtifactException {
         String path = "/home/johnson3yo/NetBeansProjects/pevi-core/src/main/java/com/pevi/core/models/entity/PvAdmin.java";
-        TestPath retrieved = PackageService.retrievePackageWithClassName(path);
+        PathProperty retrieved = PackageService.retrievePackageWithClassName(path);
         Assert.assertTrue(!retrieved.getClassPackage().contains("/"));
         Assert.assertTrue(retrieved.getClassPackage().contains("."));
     }
@@ -93,14 +93,14 @@ public class PojoTestGeneratorMojoTest {
     @Test
     public void testGetClassNameFromLinuxPath() throws IconArtifactException {
         String path = "/home/johnson3yo/NetBeansProjects/pevi-core/src/main/java/com/pevi/core/models/entity/PvAdmin.java";
-        TestPath retrieved = PackageService.retrievePackageWithClassName(path);
+        PathProperty retrieved = PackageService.retrievePackageWithClassName(path);
         Assert.assertEquals("PvAdmin", retrieved.getClassName());
     }
 
     @Test
     public void testGetPackageFromWindowPath() throws IconArtifactException {
         String path = "C:\\home\\johnson3yo\\NetBeansProjects\\pevi-core\\src\\main\\java\\com\\pevi\\core\\models\\entity\\PvAdmin.java";
-        TestPath retrieved = PackageService.retrievePackageWithClassName(path);
+        PathProperty retrieved = PackageService.retrievePackageWithClassName(path);
         Assert.assertTrue(!retrieved.getClassPackage().contains("\\"));
 
     }
@@ -108,9 +108,11 @@ public class PojoTestGeneratorMojoTest {
     @Test
     public void testGetClassNameFromWindowPath() throws IconArtifactException {
         String path = "C:\\home\\johnson3yo\\NetBeansProjects\\pevi-core\\src\\main\\java\\com\\pevi\\core\\models\\entity\\PvAdmin.java";
-        TestPath retrieved = PackageService.retrievePackageWithClassName(path);
+        PathProperty retrieved = PackageService.retrievePackageWithClassName(path);
 
         Assert.assertEquals("PvAdmin", retrieved.getClassName());
+        
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+retrieved);
     }
 
     @Test(expected = IconArtifactException.class)

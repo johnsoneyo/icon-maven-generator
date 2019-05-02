@@ -69,7 +69,7 @@ public class PackageService {
 
     }
 
-    public static TestPath retrievePackageWithClassName(String path) throws IconArtifactException {
+    public static PathProperty retrievePackageWithClassName(String path) throws IconArtifactException {
 
         String packages$ = path.substring(path.indexOf("java") + 5).
                 replaceAll(".[A-Za-z]+.\\.java", "").replaceAll("/", ".").replace("\\", ".");
@@ -84,7 +84,7 @@ public class PackageService {
         }
 
         
-        return new TestPath(className,packages$, path.substring(path.indexOf("java") + 5).
+        return new PathProperty(className,packages$, path.substring(path.indexOf("java") + 5).
                 replaceAll(".[A-Za-z]+.\\.java", ""));
     }
 

@@ -7,7 +7,7 @@ package com.lbt.icon.artifact.plugin;
 
 import com.lbt.icon.artifact.plugin.exception.IconArtifactException;
 import com.lbt.icon.artifact.plugin.factory.pkg.PackageService;
-import com.lbt.icon.artifact.plugin.factory.pkg.TestPath;
+import com.lbt.icon.artifact.plugin.factory.pkg.PathProperty;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -15,6 +15,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import org.apache.maven.plugin.AbstractMojo;
@@ -31,7 +33,7 @@ public class PojoTestGeneratorMojo extends AbstractMojo {
 
     private File root;
     private List<File> files;
-    private List<String> packages;
+    private List<PathProperty> packages;
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
@@ -49,13 +51,20 @@ public class PojoTestGeneratorMojo extends AbstractMojo {
         packages = new ArrayList();
         for (File file : files) {
             try {
-                TestPath retrieved = PackageService.retrievePackageWithClassName(file.getAbsolutePath());
-                packages.add(retrieved.getClassPackage());
+                PathProperty retrieved = PackageService.retrievePackageWithClassName(file.getAbsolutePath());
+                packages.add(retrieved);
             } catch (IconArtifactException ex) {
             }
         }
 
-        packages.forEach(System.out::println);
+        packages.stream().forEach(property -> {
+        
+            try {
+                PackageService.generatePackageForTests("", root, property.getClassPath());
+            } catch (IconArtifactException ex) {
+                Logger.getLogger(PojoTestGeneratorMojo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
     }
 
     public void processPath(File root) {
