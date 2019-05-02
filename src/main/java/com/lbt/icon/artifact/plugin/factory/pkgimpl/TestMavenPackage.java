@@ -23,5 +23,13 @@ public class TestMavenPackage implements MavenPackage {
         }
         throw new IconArtifactException("test could not be created ");
     }
+    
+     public File generatePackageWithPath(File root,String path) throws IconArtifactException {
+        File newFile = new File(root, path);
+        if (newFile.mkdirs()) {
+            return newFile;
+        }
+        throw new IconArtifactException("test could not be created ");
+    }
 
 }
