@@ -32,7 +32,7 @@ public class TestMavenPackage implements MavenPackage {
         File newFile = new File(root, "src/test/java/" + path);
 
         if (newFile.exists()) {
-            deleteDirectoryRecursion(Paths.get(newFile.getAbsolutePath()));
+            return newFile;
         }
 
         if (newFile.mkdirs()) {
