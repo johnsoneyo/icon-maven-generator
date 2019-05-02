@@ -13,7 +13,7 @@ import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 import org.junit.Test;
 
-public class CrudTest {
+public class ${className}Test {
     @Test
     public void testPojo() {
         // PREPARE
