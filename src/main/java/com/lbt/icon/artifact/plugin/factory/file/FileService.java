@@ -36,6 +36,7 @@ public class FileService {
         IconFile file = instance.getFile(type);
         return file.generateFile(root, titles);
     }
+   
 
     public static void setUpDefaultPackageFiles(File sourceFile, String[] titles, Prompter prompter) throws IconArtifactException, PrompterException {
 

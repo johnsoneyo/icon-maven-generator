@@ -6,6 +6,7 @@
 package com.lbt.icon.artifact.plugin;
 
 import com.lbt.icon.artifact.plugin.exception.IconArtifactException;
+import com.lbt.icon.artifact.plugin.factory.file.FileService;
 import com.lbt.icon.artifact.plugin.factory.pkg.PackageService;
 import com.lbt.icon.artifact.plugin.factory.pkg.PathProperty;
 import java.io.File;
@@ -28,7 +29,7 @@ import org.apache.maven.plugins.annotations.Mojo;
  *
  * @author johnson3yo
  */
-@Mojo(requiresProject = false, name = "pojotest")
+@Mojo(requiresProject = false, name = "generatetests")
 public class PojoTestGeneratorMojo extends AbstractMojo {
 
     private File root;
@@ -38,17 +39,22 @@ public class PojoTestGeneratorMojo extends AbstractMojo {
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
 
+        files = new ArrayList();
+        packages = new ArrayList();
+
         getLog().info("::::: Select Icon Module Root  ::::::::::::");
 
         JFileChooser fc = new JFileChooser();
-        int retValue = fc.showOpenDialog(new JPanel());
-        if (retValue == JFileChooser.APPROVE_OPTION) {
+        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int r = fc.showOpenDialog(new JPanel());
+
+        if (r == JFileChooser.APPROVE_OPTION) {
             root = fc.getSelectedFile();
-            processPath(root);
         }
-        
-        files = new ArrayList();
-        packages = new ArrayList();
+
+        root = fc.getSelectedFile();
+        processPath(root);
+
         for (File file : files) {
             try {
                 PathProperty retrieved = PackageService.retrievePackageWithClassName(file.getAbsolutePath());
@@ -58,13 +64,17 @@ public class PojoTestGeneratorMojo extends AbstractMojo {
         }
 
         packages.stream().forEach(property -> {
-        
+
             try {
-                PackageService.generatePackageForTests("", root, property.getClassPath());
-            } catch (IconArtifactException ex) {
+                File testRoot = PackageService.generatePackageForTests("testmvnpackage", root, property.getClassPath());
+                FileService.generateIconFile(testRoot, new String[]{property.getClassName(),
+                    property.getClassPackage()}, "testconfig");
+            } catch (IconArtifactException | IOException ex) {
                 Logger.getLogger(PojoTestGeneratorMojo.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
+
+        getLog().info("::::: Generation Complete  ::::::::::::");
     }
 
     public void processPath(File root) {
@@ -79,6 +89,7 @@ public class PojoTestGeneratorMojo extends AbstractMojo {
     }
 
     public void generatePaths(File file) {
+
         if (file.getAbsolutePath().endsWith(".java")) {
             try {
                 Path path = Paths.get(file.getAbsolutePath());

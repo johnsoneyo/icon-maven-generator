@@ -31,7 +31,7 @@ public class PackageService {
         return domainImpl.generatePackage(root);
     }
 
-    public static File generatePackageForTests(String domain, File root, String path) throws IconArtifactException {
+    public static File generatePackageForTests(String domain, File root, String path) throws IconArtifactException, IOException {
         PackageCreator factory = PackageCreator.getInstance();
         Package domainImpl = factory.getPackage(domain);
         TestMavenPackage tm = (TestMavenPackage) domainImpl;

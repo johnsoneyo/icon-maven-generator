@@ -31,7 +31,7 @@ public class PojoTestGeneratorMojoTest {
 
     @Test
     public void testRecursiveTraversal() {
-        operation1(new File("/home/johnson3yo/NetBeansProjects/pevi-core"));
+        operation1(new File("/home/johnson3yo/icon-multimodule"));
 
         Integer value = new Integer(0);
 
@@ -102,7 +102,6 @@ public class PojoTestGeneratorMojoTest {
         String path = "C:\\home\\johnson3yo\\NetBeansProjects\\pevi-core\\src\\main\\java\\com\\pevi\\core\\models\\entity\\PvAdmin.java";
         PathProperty retrieved = PackageService.retrievePackageWithClassName(path);
         Assert.assertTrue(!retrieved.getClassPackage().contains("\\"));
-
     }
 
     @Test
@@ -110,16 +109,14 @@ public class PojoTestGeneratorMojoTest {
         String path = "C:\\home\\johnson3yo\\NetBeansProjects\\pevi-core\\src\\main\\java\\com\\pevi\\core\\models\\entity\\PvAdmin.java";
         PathProperty retrieved = PackageService.retrievePackageWithClassName(path);
 
-        Assert.assertEquals("PvAdmin", retrieved.getClassName());
-        
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+retrieved);
+        Assert.assertEquals("PvAdmin", retrieved.getClassName());       
+        System.out.println(":::::::::::::::::"+retrieved);
     }
 
     @Test(expected = IconArtifactException.class)
     public void testRetrieveWithoutClassName() throws IconArtifactException {
         String path = "C:\\home\\johnson3yo\\NetBeansProjects\\pevi-core\\src\\main\\java\\com\\pevi\\core\\models\\entity";
         PackageService.retrievePackageWithClassName(path);
-
     }
 
 }

@@ -1,6 +1,7 @@
 
-package com.example.demo.domain.temp;
+package ${classPackage};
 
+import ${classPackage}.${className};
 import com.openpojo.reflection.PojoClass;
 import com.openpojo.reflection.impl.PojoClassFactory;
 import com.openpojo.validation.Validator;
@@ -17,7 +18,7 @@ public class ${className}Test {
     @Test
     public void testPojo() {
         // PREPARE
-        PojoClass personPojo = PojoClassFactory.getPojoClass(Crud.class);
+        PojoClass personPojo = PojoClassFactory.getPojoClass(${className}.class);
 
         // ACT
         Validator validator = ValidatorBuilder.create()
@@ -32,7 +33,7 @@ public class ${className}Test {
     @Test
     public void testHashCodeAndEquals() {
         EqualsVerifier
-                .forClass(Crud.class)
+                .forClass(${className}.class)
                 .suppress(Warning.ALL_FIELDS_SHOULD_BE_USED)
                 .withRedefinedSuperclass()
                 .verify();

@@ -49,5 +49,15 @@
     </dependencies>
     <name>iconartifact-maven-plugin</name>
     
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-plugin-plugin</artifactId>
+                <version>3.4</version>
+            </plugin>
+            <!-- other plugins -->
+        </plugins>
+    </build>
 
 </project>

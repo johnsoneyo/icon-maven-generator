@@ -18,6 +18,7 @@ import com.lbt.icon.artifact.plugin.factory.file.RepositoryIconFile;
 import com.lbt.icon.artifact.plugin.factory.file.ServiceIconFile;
 import com.lbt.icon.artifact.plugin.factory.file.ServiceImplIconFile;
 import com.lbt.icon.artifact.plugin.factory.file.SwaggerConfigIconFile;
+import com.lbt.icon.artifact.plugin.factory.file.TestIconFile;
 import com.lbt.icon.artifact.plugin.factory.file.ValidatorIconFile;
 import java.util.HashMap;
 import java.util.Map;
@@ -45,6 +46,7 @@ public class IconFileCreator {
         fileMap.put("validator", new ValidatorIconFile());
         fileMap.put("defaultconfig", new DefaultConfigIconFile());
         fileMap.put("swaggerconfig", new SwaggerConfigIconFile());
+        fileMap.put("testconfig", new TestIconFile());
         return INSTANCE;
     }
 
